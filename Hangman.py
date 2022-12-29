@@ -2,6 +2,7 @@
 
 import random
 from words import word_list
+from display import display_hangman
 
 # Functions
 
@@ -21,6 +22,7 @@ def game(word):
     tries = 6
 
     print("Are you ready! Let's PLAY HANGMAN!!!")
+    print(display_hangman(tries))
     print(word_completion)
     print("\n")
 
@@ -75,7 +77,7 @@ def game(word):
         # Input is not valid
         else:
             print("Not a valid guess.")
-
+        print(display_hangman(tries))
         print(word_completion)
         print("\n")
 
@@ -89,12 +91,18 @@ def game(word):
         print("\n")
 
 
-# This function will display the hanging man
-#def display_hangman(tries):
-
 # Main code
-word = get_word()
-game(word)
+login = """
+          *************************************************
+          -----------------LOG IN PAGE ------------------\n
+          -----------------  HANGMAN   ------------------\n
+          ---------------- by Hassan  -------------------\n
+          *************************************************
+        """
+print(login)
+if input("Do you want to start Hangman Game?") == "YES":
+    word = get_word()
+    game(word)
 
 while input("Do you want to play again? (Yes/No)").upper() == "YES":
     word = get_word()
