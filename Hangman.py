@@ -3,6 +3,7 @@
 import random
 from words import word_list
 from display import display_hangman
+import login
 
 # Functions
 
@@ -92,19 +93,13 @@ def game(word):
 
 
 # Main code
-login = """
-          *************************************************
-          -----------------LOG IN PAGE ------------------\n
-          -----------------  HANGMAN   ------------------\n
-          ---------------- by Hassan  -------------------\n
-          *************************************************
-        """
-print(login)
-if input("Do you want to start Hangman Game?") == "YES":
+if login.login_pygame():
+    #print("Let's play HANGMAN!")
+    #if input("Do you want to start Hangman Game?").upper() == "YES":
     word = get_word()
     game(word)
 
-while input("Do you want to play again? (Yes/No)").upper() == "YES":
-    word = get_word()
-    game(word)
+    while input("Do you want to play again? (Yes/No)").upper() == "YES":
+        word = get_word()
+        game(word)
 print("Good bye! Game is finished!!!")
