@@ -4,6 +4,7 @@ import random
 from words import word_list
 from display import display_hangman
 import login
+import os
 
 # Functions
 
@@ -15,7 +16,7 @@ def get_word():
 
 
 # This function will play the game based on the word that has been selected
-def game(word):
+def game(word,user):
     word_completion = "_" * len(word)
     guessed = False
     guessed_letters = []
@@ -23,6 +24,7 @@ def game(word):
     tries = 6
 
     print("Are you ready! Let's PLAY HANGMAN!!!")
+    print("Your user name is: ",user)
     print(display_hangman(tries))
     print(word_completion)
     print("\n")
@@ -82,24 +84,96 @@ def game(word):
         print(word_completion)
         print("\n")
 
+    # Player guessed correctly
     if guessed:
         print("Congrats, you guessed the word correctly! YOU  WIN!")
         print("\n")
+
+        #update score board
+        f_main = open("score_board.txt", "r")
+        f_temp = open("temp.txt", "a")
+
+        main_file = {}
+
+        for line in f_main:
+            (key, val) = line.split(",")
+            main_file [key] = int(val[:-1])
+
+
+        if user in main_file.keys():
+            main_file[user] += 1
+        else:
+            main_file[user] = 1
+
+        #print(main_file)
+
+        for user_name in main_file:
+            f_temp.write(user_name + ',' + str(main_file[user_name])+'\n')
+
+        f_temp.close()
+        f_main.close()
+
+        os.remove("score_board.txt")
+        os.rename("temp.txt","score_board.txt")
+    
+    # Player guessed incorrectly
     else:
         print("Sorry, you ran out of tries,The word was " + word +
               ". Maybe next time!")
         print("YOU LOOSE!")
         print("\n")
 
+        # update score board
+        f_main = open("score_board.txt", "r")
+        f_temp = open("temp.txt", "a")
+
+        main_file = {}
+
+        for line in f_main:
+            (key, val) = line.split(",")
+            main_file [key] = int(val[:-1])
+
+
+        if user in main_file.keys():
+            main_file[user] -= 1
+        else:
+            main_file[user] = 0
+
+        print(main_file)
+
+        for user_name in main_file:
+            f_temp.write(user_name + ',' + str(main_file[user_name])+'\n')
+
+        f_temp.close()
+        f_main.close()
+
+        os.remove("score_board.txt")
+        os.rename("temp.txt","score_board.txt")
+
 
 # Main code
-if login.login_pygame():
+score_board = {}
+result_login = login.login_pygame()
+username = result_login[1]
+if result_login[0]:
     #print("Let's play HANGMAN!")
     #if input("Do you want to start Hangman Game?").upper() == "YES":
     word = get_word()
-    game(word)
+    game(word,username)
 
     while input("Do you want to play again? (Yes/No)").upper() == "YES":
         word = get_word()
         game(word)
+if input("Do you want to see the score_board? (Yes/No)").upper() == "YES":
+    with open ("score_board.txt") as f:
+        for line in f:
+        #print(line)
+            (key, val) = line.split(",")
+            score_board[key] = val
+    username = input("Please enter your user name: ") 
+    if username in score_board.keys():
+        print("Your score is: ", score_board[username])
+    else:
+        print("There is no data for the user name.")
+
 print("Good bye! Game is finished!!!")

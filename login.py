@@ -85,8 +85,7 @@ def login_pygame():
                     elif active_input_field == "password":
                         active_input_field = "username"
                 elif event.key == pygame.K_RETURN:
-                    if username in data.keys():
-                      if data[username] == password:
+                    if username in data.keys() and data[username] == password:
                     #if username == correct_username and password == correct_password:
                         message = font.render("Login successful", True,
                                             (0, 255, 0))
@@ -119,4 +118,4 @@ def login_pygame():
     time.sleep(3)
     pygame.quit()
 
-    return result
+    return (result,username)
