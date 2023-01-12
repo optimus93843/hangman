@@ -5,6 +5,7 @@ from words import word_list
 from display import display_hangman
 import login
 import os
+import menu 
 
 # Functions
 
@@ -153,6 +154,7 @@ def game(word,user):
 
 # Main code
 score_board = {}
+menu.menu_pygame()
 result_login = login.login_pygame()
 username = result_login[1]
 if result_login[0]:
