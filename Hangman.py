@@ -140,7 +140,7 @@ def game(word,user):
         else:
             main_file[user] = 0
 
-        print(main_file)
+        #print(main_file)
 
         for user_name in main_file:
             f_temp.write(user_name + ',' + str(main_file[user_name])+'\n')
@@ -172,10 +172,12 @@ if input("Do you want to see the score_board? (Yes/No)").upper() == "YES":
         #print(line)
             (key, val) = line.split(",")
             score_board[key] = val
-    username = input("Please enter your user name: ") 
-    if username in score_board.keys():
-        print("Your score is: ", score_board[username])
-    else:
-        print("There is no data for the user name.")
+    # username = input("Please enter your user name: ") 
+    # if username in score_board.keys():
+    #     print("Your score is: ", score_board[username])
+    # else:
+    #     print("There is no data for the user name.")
+    for score in score_board:
+        print("User name: " + score + '---'+"Score: " +  score_board[score] )
 
 print("Good bye! Game is finished!!!")

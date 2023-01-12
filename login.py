@@ -12,7 +12,7 @@ def login_page():
         """
     print(log)
     username = input("Please enter your username: ")
-    password = input("Please entere your password: ")
+    password = input("Please enter your password: ")
     result = False
 
     data = {"testuser": "testpass"}
@@ -89,7 +89,7 @@ def login_pygame():
                     #if username == correct_username and password == correct_password:
                         message = font.render("Login successful", True,
                                             (0, 255, 0))
-                        message = font.render("Now let's go to text based gaem!", True,
+                        message = font.render("Now let's go to text based game!", True,
                                             (0, 255, 0))
                         screen.blit(message, (50, 150))
                         running = False
