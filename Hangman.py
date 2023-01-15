@@ -1,11 +1,22 @@
+#Name: Hassan Azam
+#Assignment: Computer Science Final Culminating
+#Class: Mr.Tombs
+#Course code: ICS3UR
+#School: Port Credit Secondary School
+#Due Date: January 20, 2023
+
+
+
+
+
 # import libraries
 
-import random
-from words import word_list
-from display import display_hangman
-import login
-import os
-import menu 
+import random   #This makes the game select random words from word.py
+from words import word_list     #This library contains all the words that we will use in the game
+from display import display_hangman     #This imports the display of the hangman game
+import login    #This imports the login page 
+import os   #Controls operating system
+import menu     #imports the menus here
 
 # Functions
 
@@ -94,20 +105,21 @@ def game(word,user):
         f_main = open("score_board.txt", "r")
         f_temp = open("temp.txt", "a")
 
-        main_file = {}
+        
+        main_file = {}  
 
         for line in f_main:
             (key, val) = line.split(",")
             main_file [key] = int(val[:-1])
 
-
+        #This updates the file which is the scoreboard in this case
         if user in main_file.keys():
             main_file[user] += 1
         else:
             main_file[user] = 1
 
-        #print(main_file)
-
+        
+        #Removes the old score by replacing the new recent score which the user got 
         for user_name in main_file:
             f_temp.write(user_name + ',' + str(main_file[user_name])+'\n')
 
@@ -134,13 +146,13 @@ def game(word,user):
             (key, val) = line.split(",")
             main_file [key] = int(val[:-1])
 
-
+        #Updates Scoreboard by removing the old score which the user previosuly got
         if user in main_file.keys():
             main_file[user] -= 1
         else:
             main_file[user] = 0
 
-        #print(main_file)
+        
 
         for user_name in main_file:
             f_temp.write(user_name + ',' + str(main_file[user_name])+'\n')
@@ -152,32 +164,32 @@ def game(word,user):
         os.rename("temp.txt","score_board.txt")
 
 
-# Main code
+# Puts a score in the scoreboard file/text and displays it to the user
 score_board = {}
 menu.menu_pygame()
 result_login = login.login_pygame()
 username = result_login[1]
+
+#This is for the username and password to see if the user got their correct username and password
 if result_login[0]:
-    #print("Let's play HANGMAN!")
-    #if input("Do you want to start Hangman Game?").upper() == "YES":
+   
     word = get_word()
     game(word,username)
 
+#This just ask the user wether or not if they want to play again and if they want to see the scoreboard
     while input("Do you want to play again? (Yes/No)").upper() == "YES":
         word = get_word()
         game(word)
+        
 if input("Do you want to see the score_board? (Yes/No)").upper() == "YES":
     with open ("score_board.txt") as f:
         for line in f:
-        #print(line)
+        
             (key, val) = line.split(",")
             score_board[key] = val
-    # username = input("Please enter your user name: ") 
-    # if username in score_board.keys():
-    #     print("Your score is: ", score_board[username])
-    # else:
-    #     print("There is no data for the user name.")
     for score in score_board:
         print("User name: " + score + '---'+"Score: " +  score_board[score] )
 
+
+#The End
 print("Good bye! Game is finished!!!")

@@ -81,5 +81,5 @@ def display_hangman(tries):
 
     return states[tries]
 
-#def display_hangman_pygame(tries):
+
 
