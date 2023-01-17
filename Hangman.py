@@ -12,7 +12,7 @@
 # import libraries
 
 import random   #This makes the game select random words from word.py
-from words import word_list     #This library contains all the words that we will use in the game
+import words    #This library contains all the words that we will use in the game
 from display import display_hangman     #This imports the display of the hangman game
 import login    #This imports the login page 
 import os   #Controls operating system
@@ -22,8 +22,13 @@ import menu     #imports the menus here
 
 
 # This function will choose a word from our data base
-def get_word():
-    word = random.choice(word_list)
+def get_word(game_level):
+    if game_level == "easy":
+        word = random.choice(words.word_list_easy)
+    elif game_level == "medium":
+        word = random.choice(words.word_list_medium)
+    else:
+        word = random.choice(words.word_list_hard)
     return word.upper()
 
 
@@ -167,19 +172,29 @@ def game(word,user):
 # Puts a score in the scoreboard file/text and displays it to the user
 score_board = {}
 menu.menu_pygame()
-result_login = login.login_pygame()
+login_tries = 3
+result_login = login.login_pygame(login_tries)
+login_tries -=1
 username = result_login[1]
 
+
+while login_tries >0:
+    if result_login[0] == False:
+        result_login = login.login_pygame(login_tries)
+        login_tries -= 1
+    else:
+        break
 #This is for the username and password to see if the user got their correct username and password
 if result_login[0]:
-   
-    word = get_word()
+    level = input("Which level do you choose? (easy/medium/hard): ")
+    word = get_word(level)
     game(word,username)
 
 #This just ask the user wether or not if they want to play again and if they want to see the scoreboard
     while input("Do you want to play again? (Yes/No)").upper() == "YES":
-        word = get_word()
-        game(word)
+        level = input("Which level do you choose? (easy/medium/hard): ")
+        word = get_word(level)
+        game(word,username)
         
 if input("Do you want to see the score_board? (Yes/No)").upper() == "YES":
     with open ("score_board.txt") as f:

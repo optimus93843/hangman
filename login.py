@@ -9,7 +9,7 @@ import pygame
 
 
 #def is to define a function 
-def login_pygame():
+def login_pygame(tries):
     result = False
 
  #initializes the pygame screen
@@ -92,9 +92,10 @@ def login_pygame():
 
                         #This is for an incorrect/invalid username or password
                     else:
-                        message = font.render("Invalid user name or password",
-                                            True, (255, 0, 0))
+                        message = font.render("Invalid user name or password",True, (255, 0, 0))
                         screen.blit(message, (50, 300))
+                        try_message = font.render("You have " + str(tries-1) + " try left!" ,True, (255, 0, 0))
+                        screen.blit(try_message, (50,350))
                         running = False
 
                 #This for adding the username and password immediately to the bos that we created
