@@ -14,6 +14,7 @@
 import random   #This makes the game select random words from word.py
 import words    #This library contains all the words that we will use in the game
 from display import display_hangman     #This imports the display of the hangman game
+from display import display_scores      #This imports the display of the score board
 import login    #This imports the login page 
 import os   #Controls operating system
 import menu     #imports the menus here
@@ -202,8 +203,10 @@ if input("Do you want to see the score_board? (Yes/No)").upper() == "YES":
         
             (key, val) = line.split(",")
             score_board[key] = val
-    for score in score_board:
-        print("User name: " + score + '---'+"Score: " +  score_board[score] )
+    display_scores(score_board)
+    # our scores are saved in score_board dictionary
+    # for score in score_board:
+    #     print("User name: " + score + '---'+"Score: " +  score_board[score] )
 
 
 #The End

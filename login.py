@@ -27,7 +27,7 @@ def login_pygame(tries):
  #This just sets the default font for all the texts 
     font = pygame.font.Font(None, 32)
 
- #We are going to check username and password and check to see if its correcy in the data.text
+ #We are going to check username and password and check to see if its correct in the data.text
     data = {}
     with open ("data.txt") as f:
         for line in f:
