@@ -6,3 +6,4 @@ with open ("data.txt") as f:
         data[key] = val[:-1]
 
 print(data)
+
