@@ -15,6 +15,7 @@ import random   #This makes the game select random words from word.py
 import words    #This library contains all the words that we will use in the game
 from display import display_hangman     #This imports the display of the hangman game
 from display import display_scores      #This imports the display of the score board
+from level import select_level
 import login    #This imports the login page 
 import os   #Controls operating system
 import menu     #imports the menus here
@@ -187,13 +188,15 @@ while login_tries >0:
         break
 #This is for the username and password to see if the user got their correct username and password
 if result_login[0]:
-    level = input("Which level do you choose? (easy/medium/hard): ")
+    #level = input("Which level do you choose? (easy/medium/hard): ")
+    level = select_level()
     word = get_word(level)
     game(word,username)
 
 #This just ask the user wether or not if they want to play again and if they want to see the scoreboard
     while input("Do you want to play again? (Yes/No)").upper() == "YES":
-        level = input("Which level do you choose? (easy/medium/hard): ")
+        # level = input("Which level do you choose? (easy/medium/hard): ")
+        level = select_level()
         word = get_word(level)
         game(word,username)
         
