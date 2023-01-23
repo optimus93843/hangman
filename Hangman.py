@@ -16,6 +16,7 @@ import words    #This library contains all the words that we will use in the gam
 from display import display_hangman     #This imports the display of the hangman game
 from display import display_scores      #This imports the display of the score board
 from level import select_level
+from sign_up import sign_up_user
 import login    #This imports the login page 
 import os   #Controls operating system
 import menu     #imports the menus here
@@ -155,7 +156,10 @@ def game(word,user):
 
         #Updates Scoreboard by removing the old score which the user previosuly got
         if user in main_file.keys():
-            main_file[user] -= 1
+            if main_file[user] <= 0:
+                main_file[user] = 0
+            else:
+                main_file[user] -= 1
         else:
             main_file[user] = 0
 
@@ -178,16 +182,37 @@ login_tries = 3
 result_login = login.login_pygame(login_tries)
 login_tries -=1
 username = result_login[1]
-
+login_result = False
 
 while login_tries >0:
     if result_login[0] == False:
         result_login = login.login_pygame(login_tries)
+        username = result_login[1]
         login_tries -= 1
     else:
-        break
+        # break
+        login_tries -= 1
+        login_result = True
+
+# if their user name is not in data asking for information in order to sign-up
+
+data = {}
+with open ("data.txt") as f:
+    for line in f:
+        
+        (key, val) = line.split(",")
+        data[key] = val[:-1]
+
+if username in data and result_login[0] == False:
+    print("Your access is denied")
+elif result_login[0] == False:
+    #print("Do you want to sign-up?")
+    username = sign_up_user()
+    login_result = True
+
+
 #This is for the username and password to see if the user got their correct username and password
-if result_login[0]:
+if login_result:
     #level = input("Which level do you choose? (easy/medium/hard): ")
     level = select_level()
     word = get_word(level)

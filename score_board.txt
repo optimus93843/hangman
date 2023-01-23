@@ -1,4 +1,7 @@
 username,0
-hassan,-5
+hassan,0
 test,0
-a,-2
+a,0
+jame,0
+has,1
+tombs,0

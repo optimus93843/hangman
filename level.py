@@ -67,7 +67,7 @@ def select_level():
                     running = False
                 elif icon_rec_h.collidepoint(event.pos):
                     #print("The hard icon clicked!")
-                    selected_level = "hard"
+                    selected_level = "githard"
                     running = False
 
         
