@@ -1,14 +1,10 @@
-# login module
-
-
-
-#What the import time does it takes 3 seconds after when you login with your username and password to open up a new page 
-import time
+#imports the time and it freezes the screen for 3 seconds/makes the user wait for 3 seconds for the screen to pop out
+import time  
 #Import pygame is just imports all the avaible pygame modules
 import pygame
 
 
-#def is to define a function 
+#This function is doing login
 def login_pygame(tries):
     result = False
 
@@ -18,7 +14,7 @@ def login_pygame(tries):
  #This just sets the boundary for the login page size
     window_size = (600, 400)
 
- #This just uses an image fron image_1 file and it creates it on the login page
+ #This just uses an image fron image_1 file and it creates it on the login page and it displays the username and password
     screen = pygame.display.set_mode(window_size)
     bg_image = pygame.image.load("image_1.jpg")
     bg_image = pygame.transform.scale(bg_image, window_size)
@@ -44,7 +40,7 @@ def login_pygame(tries):
     username_label = font.render("User Name: ", True, (255, 255, 255))
     password_label = font.render("Password: ", True, (255, 255, 255))
 
- #Puts an image on the login page
+ #This is for the postioning of the labels and images 
     screen.blit(bg_image,(0,0))
     screen.blit(username_label, (50, 50))
     screen.blit(password_label, (50, 100))
@@ -98,7 +94,7 @@ def login_pygame(tries):
                         screen.blit(try_message, (50,350))
                         running = False
 
-                #This for adding the username and password immediately to the bos that we created
+                #This for adding the username and password immediately to the screen that we created
                 else:
                     if active_input_field == "username":
                         username += event.unicode

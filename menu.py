@@ -6,7 +6,7 @@ import time    #What the import time does it takes 3 seconds after when you logi
 
 
 
-#def is to define a function 
+#This for the menu 
 def menu_pygame():
 
  #initializes the pygame screen

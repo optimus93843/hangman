@@ -1,15 +1,18 @@
-import pygame
-import time
+import pygame #Imports all the pygame modules 
+import time   #What the import time does it takes 3 seconds to open the page 
 import os
 
+
+#This is for the signup a new user function
 def sign_up_user():
 
-
+    #This initializes the pygame
     pygame.init()
 
+    #This sets the boundary for the window size
     window_size = (600, 400)
 
- #This just uses an image fron image_1 file and it creates it on the login page
+    #Puts screen caption
     screen = pygame.display.set_mode(window_size)
     pygame.display.set_caption("Sign-up page!")
 
@@ -28,27 +31,27 @@ def sign_up_user():
 
     username = ""
     password = ""
-    #print(data)
- #Determines the font color on the username and passwords 
+    
+    #This sets the color for new user and password label
     username_label = font.render("New User: ", True, (255, 255, 255))
     password_label = font.render("Password: ", True, (255, 255, 255))
 
- #Puts an image on the login page
+    #Puts an image on the login page
     screen.blit(username_label, (50, 50))
     screen.blit(password_label, (50, 100))
  
- #It will create a rectangle with the sizes of it
+    #It will create a rectangle with the sizes of it
     username_rect = pygame.Rect(200, 50, 200, 32)
     password_rect = pygame.Rect(200, 100, 200, 32)
 
     pygame.draw.rect(screen, (255, 255, 255), username_rect)
     pygame.draw.rect(screen, (255, 255, 255), password_rect)
 
- #This means that when the page loads, the user can start clicking and writing
+    #This means that when the page loads, the user can start clicking and writing
     active_input_field = "username"
     running = True
 
- #This while loop is for the keys, when the user presses a key it will do something such as writing a username and password
+    #This while loop is for the keys, when the user presses a key it will do something such as writing a username and password
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -72,7 +75,7 @@ def sign_up_user():
                     data[username] = password
                     new_user_result = username
 
-
+                    #Adding the new user and password
                     for u in data:
                         data_temp.write(u + ',' + str(data[u])+'\n')
 
@@ -88,7 +91,7 @@ def sign_up_user():
                         
                     running = False
 
-                #This for adding the username and password immediately to the bos that we created
+                #This for adding the username and password immediately to the screen that we created
                 else:
                     if active_input_field == "username":
                         username += event.unicode
@@ -119,6 +122,3 @@ def sign_up_user():
 
     #It will return the result and username of the code
     return new_user_result
-    #print(data)
-
-# sign_up_user()

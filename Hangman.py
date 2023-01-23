@@ -15,11 +15,13 @@ import random   #This makes the game select random words from word.py
 import words    #This library contains all the words that we will use in the game
 from display import display_hangman     #This imports the display of the hangman game
 from display import display_scores      #This imports the display of the score board
-from level import select_level
-from sign_up import sign_up_user
+from level import select_level          #This imports the level for if you want to select the level
+from sign_up import sign_up_user        #This imports the sign up page for the user
 import login    #This imports the login page 
 import os   #Controls operating system
 import menu     #imports the menus here
+
+
 
 # Functions
 
@@ -164,7 +166,7 @@ def game(word,user):
             main_file[user] = 0
 
         
-
+        
         for user_name in main_file:
             f_temp.write(user_name + ',' + str(main_file[user_name])+'\n')
 
@@ -190,11 +192,10 @@ while login_tries >0:
         username = result_login[1]
         login_tries -= 1
     else:
-        # break
         login_tries -= 1
         login_result = True
 
-# if their user name is not in data asking for information in order to sign-up
+# If their user name is not in data asking for information in order to sign-up
 
 data = {}
 with open ("data.txt") as f:
@@ -206,21 +207,18 @@ with open ("data.txt") as f:
 if username in data and result_login[0] == False:
     print("Your access is denied")
 elif result_login[0] == False:
-    #print("Do you want to sign-up?")
     username = sign_up_user()
     login_result = True
 
 
 #This is for the username and password to see if the user got their correct username and password
 if login_result:
-    #level = input("Which level do you choose? (easy/medium/hard): ")
     level = select_level()
     word = get_word(level)
     game(word,username)
 
 #This just ask the user wether or not if they want to play again and if they want to see the scoreboard
     while input("Do you want to play again? (Yes/No)").upper() == "YES":
-        # level = input("Which level do you choose? (easy/medium/hard): ")
         level = select_level()
         word = get_word(level)
         game(word,username)
@@ -232,10 +230,7 @@ if input("Do you want to see the score_board? (Yes/No)").upper() == "YES":
             (key, val) = line.split(",")
             score_board[key] = val
     display_scores(score_board)
-    # our scores are saved in score_board dictionary
-    # for score in score_board:
-    #     print("User name: " + score + '---'+"Score: " +  score_board[score] )
 
 
-#The End
+
 print("Good bye! Game is finished!!!")
